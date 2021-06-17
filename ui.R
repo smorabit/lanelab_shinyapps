@@ -1,35 +1,80 @@
-ui <- navbarPage("Syage et al J Virology 2020", theme = shinytheme("cyborg"),
-  tabPanel("Page1",
-    sidebarLayout(
-      sidebarPanel(width=2,
-        # select categorical variable
-        selectInput(
-          inputId = 'category1',
-          label = "select categorical variable 1",
-          choices = c("cond", "seurat_clusters"),
-          selected = "seurat_clusters"
+ui <- tagList(
+  theme = shinythemes::themeSelector(),
+  navbarPage("Syage et al J Virology 2020", # theme = 'cerulean'
+    tabPanel("Page1",
+      sidebarLayout(
+        sidebarPanel(width=2,
+
+          # select gene
+          selectizeInput(
+            inputId='vlngene1',
+            label='select gene',
+            choices=rownames(seurat_obj),
+            selected='Cst7',
+            multiple=FALSE
+          )
         ),
-        # select categorical variable 2
-        selectInput(
-          inputId = 'category2',
-          label = "select categorical variable 2",
-          choices = c("cond", 'seurat_clusters'),
-          selected = "cond"
-        )
-      ),
-      mainPanel(
-        fluidRow(
-          column(6,
-            # umap by variable 1
-            plotOutput("DimPlot1")
+        mainPanel(
+          fluidRow(
+            column(12,
+              # umap by variable 1
+              plotOutput("DimPlot1", height='600px', width='100%')
+            )
           ),
-          column(6,
-            # umap by variable 2
-            plotOutput('DimPlot2')
+          fluidRow(
+            column(12,
+              plotOutput('VlnPlot1')
+            )
+          )
+        )
+      )
+    ),
+    tabPanel("Page2",
+      sidebarLayout(
+        sidebarPanel(width=2,
+          # select gene
+          selectizeInput(
+            inputId='featuregene1',
+            label='select gene',
+            choices=rownames(seurat_obj),
+            selected='Cst7',
+            multiple=FALSE
+          )
+        ),
+        mainPanel(
+          fluidRow(
+            column(12,
+              plotOutput("FeaturePlotCondition", height='200px') #, height='800px', width='900px')
+            )
+          ),
+          fluidRow(
+            column(12,
+              plotOutput("DimPlotCondition", height='800px', width='800px')
+            )
+          )
+
+        )
+      )
+    ),
+    tabPanel("Page3",
+      sidebarLayout(
+        sidebarPanel(width=2,
+          selectizeInput(
+            inputId='dotgenes',
+            label='select genes',
+            choices=rownames(seurat_obj),
+            selected='Csf1r',
+            multiple=TRUE
+          )
+        ),
+        mainPanel(
+          fluidRow(
+            column(12,
+              plotOutput("DotPlot1")
+            )
           )
         )
       )
     )
-  ),
-  tabPanel("Page2")
+  )
 )

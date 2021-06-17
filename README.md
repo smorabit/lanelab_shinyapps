@@ -1,5 +1,3 @@
-# lanelab_shinyapps
-
 # Install required libraries:
 
 ```
