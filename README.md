@@ -27,6 +27,7 @@ Here is an example:
 Rscript --vanilla run-app-local.R \
     --ui /path/to/shinyapp/ui.R \
     --server /path/to/shinyapp/server.R \
+    --seurat /path/to/shinyapp/data/seurat.rds \
     --port 2222
 
 ```
