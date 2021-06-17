@@ -1,5 +1,11 @@
 server <- function(input, output) {
-  output$distPlot <- renderPlot({
-    hist(rnorm(input$obs), col = 'darkgray', border = 'white')
+
+  output$DimPlot1 <- renderPlot({
+    DimPlot(seurat_obj, group.by=input$category1) + DarkTheme()
   })
+
+  output$DimPlot2 <- renderPlot({
+    DimPlot(seurat_obj, group.by=input$category2)
+  })
+
 }
