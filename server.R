@@ -25,16 +25,31 @@ server <- function(input, output) {
   })
 
   output$DimPlotCondition <- renderPlot({
-    DimPlot(seurat_obj, split.by='cond', label=FALSE, cols=umap_colors, ncol=2) + theme(legend.position='bottom')
+    DimPlot(seurat_obj, split.by='cond', label=FALSE, cols=umap_colors) +
+      umap_theme + theme(legend.position='bottom')
   })
 
 
   output$DotPlot1 <- renderPlot({
-    DotPlot(seurat_obj, features=input$dotgenes)
+    print(dotplot_genes)
+    print(input$dotgenes)
+    print(class(dotplot_genes))
+    print(class(input$dotgenes))
+    DotPlot(seurat_obj, features=input$dotgenes) + RotatedAxis()
   })
 
   output$VlnPlot1 <- renderPlot({
     VlnPlot(seurat_obj, features=input$vlngene1, pt.size=0, cols=umap_colors) + NoLegend()
   })
+
+  # j virology logo:
+  output$JVLogo <- renderImage({
+
+    filename <- normalizePath(file.path('./data/jvlogo.jpeg'))
+
+
+    list(src = filename,
+       alt = "Journal of Virology")
+  },deleteFile=FALSE)
 
 }

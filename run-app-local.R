@@ -46,6 +46,15 @@ umap_theme <- theme(
 # get gene expression matrix:
 exp_mat <- GetAssayData(seurat_obj, slot='data')
 
+# dotplot default genes from the paper:
+dotplot_genes <- c(
+  'Cd3e', 'Cd4', 'Cd8a', 'Lat', 'Pdcd1', 'Gzmb', 'Bcl2', 'Xcl1', 'Ncr1', 'Kirb1c',
+  'Klre1', 'Cd79a', 'Iglc3', 'Ms4a1', 'Cd19', 'Jchain', 'F13a1', 'Hp', 'Gsr', 'Cd300a',
+  'Ms4a6d', 'Cybb', 'Tgfbi', 'Slamf7', 'Isg20', 'Smox', 'Apoe', 'Ms4a7', 'Cd81', 'Tmem119',
+  'Sparc', 'P2ry12', 'Ccl2', 'S100a9', 'S100a8', 'Camp', 'Ly6g', 'H2-Ab1', 'Ifitm1', 'Cd86',
+  'Siglech', 'Klk1', 'Cd300c'
+)
+
 # source the ui and server files:
 source(opt$ui)
 source(opt$server)
@@ -56,3 +65,11 @@ shiny::shinyApp(
   server=server,
   options=list(port=opt$port)
 )
+
+
+# example call:
+Rscript --vanilla run-app-local.R \
+  --ui ui.R \
+  --server server.R \
+  --seurat data/J-Virology/AS_Seurat_Object_JVirol.rds \
+  --port 3333
