@@ -8,7 +8,7 @@ ui <- tagList(
           # select gene
           selectizeInput(
             inputId='vlngene1',
-            label='select gene',
+            label='search a gene',
             choices=rownames(seurat_obj),
             selected='Cst7',
             multiple=FALSE
@@ -35,7 +35,7 @@ ui <- tagList(
           # select gene
           selectizeInput(
             inputId='featuregene1',
-            label='select gene',
+            label='search a gene',
             choices=rownames(seurat_obj),
             selected='Cst7',
             multiple=FALSE
@@ -61,7 +61,7 @@ ui <- tagList(
         sidebarPanel(width=2,
           selectizeInput(
             inputId='dotgenes',
-            label='select genes',
+            label='search multiple genes',
             choices=rownames(seurat_obj),
             selected=dotplot_genes,
             multiple=TRUE
